@@ -1,0 +1,162 @@
+<p><span style="font-family: Arial;">As a ReactJS developer, you might need to make HTTP requests to fetch data from an
+        API or submit data to a server. Axios is a popular JavaScript library that can be used to make HTTP requests in
+        your ReactJS project. It supports various methods for making requests, including GET and POST. In this blog
+        post, we will explore how to use Axios to make GET and POST requests in ReactJS.</span></p>
+<h3 class=""><span style="font-family: Arial;">Installing Axios</span></h3>
+<p class="">
+    <font face="Arial">Before we can use Axios in our ReactJS project, we need to install it. You can do this using npm
+        or yarn by running the following command:
+    </font>
+</p>
+<pre
+    style="background-color: black; color: white; padding: 10px;">
+    <font face="Arial">
+        <code>npm install axios</code>
+    </font>
+</pre>
+
+    <p class="">
+        <font face="Arial">or</font>
+    </p>
+
+<pre
+    style="background-color: black; color: white; padding: 10px;"><font face="Arial"><code>yarn add axios</code></font></pre>
+<font face="Arial">
+    <h3>
+        <font face="Arial">Making a Get Request</font>
+    </h3>
+    <p class="">
+        <font face="Arial">To make a GET request using Axios in ReactJS, we can use the axios.get() method. The
+            axios.get() method accepts the API endpoint URL as an argument and returns a Promise that resolves with the
+            response data.</font>
+    </p>
+    <p class="">
+        <font face="Arial"></font>
+    </p>
+    <p class="">
+        <font face="Arial">Here's an example of making a GET request using Axios in ReactJS:</font>
+    </p>
+    <pre style="background-color: black; color: white; padding: 10px;"><font face="Arial"><code>
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() =&gt; {
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response =&gt; {
+        setData(response.data);
+      })
+      .catch(error =&gt; {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    &lt;div&gt;
+      {data.map(item =&gt; (
+        &lt;div key={item.id}&gt;
+          &lt;h2&gt;{item.title}&lt;/h2&gt;
+          &lt;p&gt;{item.body}&lt;/p&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></font></pre>
+        <div>
+            <font face="Arial"><br></font>
+        </div>
+        <div>
+            <font face="Arial">In this example, we are making a GET request to the JSONPlaceholder API endpoint to fetch
+                a list of posts. We are using the useState and useEffect hooks to store the fetched data in the data
+                state and render it on the page.</font>
+        </div>
+        <div>
+            <font face="Arial"><br></font>
+        </div>
+        <h3 class="">
+            <font face="Arial">Making a POST Request</font>
+        </h3>
+        <div>To make a POST request using Axios in ReactJS, we can use the axios.post() method. The axios.post() method
+            accepts the API endpoint URL and the data we want to send as arguments and returns a Promise that resolves
+            with the response data.</div>
+        <div><br></div>
+        <div>Here's an example of making a POST request using Axios in ReactJS:</div>
+        <pre style="background-color: black; color: white; padding: 10px;"><font face="Arial"><code>
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = e =&gt; {
+    e.preventDefault();
+    axios.post('https://example.com/api/data', {
+        name: name,
+        email: email
+      })
+      .then(response =&gt; {
+        console.log(response.data);
+      })
+      .catch(error =&gt; {
+        console.log(error);
+      });
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;label&gt;
+          Name:
+          &lt;input type="text" value={name} onChange={e =&gt; setName(e.target.value)} /&gt;
+        &lt;/label&gt;
+        &lt;label&gt;
+          Email:
+          &lt;input type="email" value={email} onChange={e =&gt; setEmail(e.target.value)} /&gt;
+        &lt;/label&gt;
+        &lt;button type="submit"&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></font></pre>
+                    <div>
+                        In this example, we are making a POST request to an API endpoint to submit a name and an email.
+                        We are using the useState hook to store the name and email inputs in their respective state
+                        variables. We are also using the handleSubmit function tohandle the form submission. Inside the
+                        handleSubmit function, we are using the axios.post() method to send the name and email data to
+                        the API endpoint.</div>
+                    <div><br></div>
+                    <h3 class="">Handling Errors</h3>
+                    <p>When making HTTP requests, it's important to handle errors in case something goes wrong. Axios
+                        makes it easy to handle errors by providing a .catch() method that catches any errors that occur
+                        during the request.</p>
+                    <p>Here's an example of handling errors using Axios in ReactJS:</p>
+                    <pre style="background-color: black; color: white; padding: 10px;"><font face="Arial"><code>
+axios.get('https://jsonplaceholder.typicode.com/posts')
+  .then(response =&gt; {
+    setData(response.data);
+  })
+  .catch(error =&gt; {
+    console.log(error);
+    setError('An error occurred while fetching the data.');
+  });</code></font></pre>
+                    <div>In this example, we are using the .catch() method to catch any errors that occur while fetching
+                        the data. We are logging the error to the console and setting an error message in the setError
+                        state.</div>
+                    <div><br></div>
+                    <h3 class="">Conclusion</h3>
+                    <p>In this blog post, we have explored how to use Axios to make GET and POST requests in ReactJS. We
+                        have learned how to install Axios, make HTTP requests, and handle errors. Axios is a powerful
+                        JavaScript library that makes it easy to work with HTTP requests in ReactJS. With this
+                        knowledge, you can now start building applications that communicate with APIs and servers using
+                        Axios.<br></p>
+                    <p><br></p>
+                </div>
+            </div>
+        </div>
